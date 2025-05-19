@@ -69,3 +69,14 @@ body {
   background: #59549c;
   border-radius: 10px;
 }
+
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+}
+
+.slide-out {
+  animation: slideOut 0.4s forwards;
+}
