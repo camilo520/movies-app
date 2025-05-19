@@ -8,11 +8,14 @@ export interface Movie {
 export interface MovieItemProps {
   movie: Movie;
   onDeleteMovie: (id: number) => void;
+  onEditMovie: (movie: Movie) => void;
 }
 
 export interface MovieFormProps {
   movies: Movie[];
-  onAddMovie: (product: Omit<Movie, "fecha">) => void;
+  onAddMovie: (movie: Omit<Movie, "id">) => void;
+  onUpdateMovie: (movie: Movie) => void;
+  movieToEdit: Movie | null;
 }
 
 export interface MovieListProps {

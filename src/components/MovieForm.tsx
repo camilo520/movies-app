@@ -3,42 +3,45 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import type { MovieFormProps } from "../types/MovieType";
 
-const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
+const MovieForm: React.FC<MovieFormProps> = ({
+  onAddMovie,
+  movies,
+  onUpdateMovie,
+  movieToEdit,
+}) => {
   //---Estado para manejar las peliculas---
   const [newMovie, setNewMovie] = useState({
-    id: 0,
     titulo: "",
     poster: "",
-    anio: 0,
+    anio: "",
   });
 
   //---Función para agregar una pelicula a la lista---
   const handleSubmit = () => {
-    const exists = movies.some((movie) => movie.id === newMovie.id);
-    if (exists) {
-      toast.error("El código ya está registrado. Intente con otro código.", {
-        position: "top-center",
-        autoClose: 3000,
-        isLoading: false,
-      });
+    // Validar si ya existe otra película con el mismo título
+    const titleExists = movies.some(
+      (movie) =>
+        movie.titulo.toLowerCase() === newMovie.titulo.toLowerCase() &&
+        movie.id !== movieToEdit?.id // excluir la que estamos editando
+    );
+
+    if (titleExists) {
+      toast.error("Ya existe una película con ese título.");
       return;
     }
 
-    onAddMovie(newMovie);
-    toast.success("¡Producto agregado exitosamente!", {
-      position: "top-center",
-      autoClose: 1000,
-      isLoading: false,
-    });
+    if (movieToEdit) {
+      // Modo edición
+      onUpdateMovie({ ...movieToEdit, ...newMovie });
 
-    setNewMovie({ id: 0, titulo: "", poster: "", anio: 0 });
-  };
-
-  //---Función para evitar caracteres especiales en los inputs de tipo número---
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "-" || e.key === "e" || e.key === "+" || e.key === ".") {
-      e.preventDefault();
+      toast.success("¡Película actualizada!");
+    } else {
+      // Modo creación
+      onAddMovie(newMovie);
+      toast.success("¡Película agregada!");
     }
+
+    setNewMovie({ titulo: "", poster: "", anio: "" });
   };
 
   //Función para evitar el scroll del raton en los inputs de tipo número---
@@ -48,25 +51,13 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
 
   //---Condición para habilitar el botón de agregar producto---
   const isSubmitted =
-    newMovie.id > 0 &&
     newMovie.titulo.trim() !== "" &&
     newMovie.poster.trim() !== "" &&
-    newMovie.anio > 0;
+    newMovie.anio.trim() !== "";
 
   return (
     <div className="mb-4 flex flex-col gap-3">
       <ToastContainer />
-      <input
-        type="number"
-        placeholder="Ingrese el código del producto..."
-        value={newMovie.id || ""}
-        onChange={(e) =>
-          setNewMovie({ ...newMovie, id: Number(e.target.value) })
-        }
-        onKeyDown={handleKeyDown}
-        onWheel={handleWheel}
-        className="border rounded-lg p-2  no-arrows"
-      />
       <input
         type="text"
         placeholder="Ingrese el titulo de la pelicula..."
@@ -75,13 +66,30 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
         className="border p-2 rounded-lg"
       />
       <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) {
+            const imageURL = URL.createObjectURL(file);
+            setNewMovie({ ...newMovie, poster: imageURL });
+          }
+        }}
+        className="border p-2 rounded-lg"
+      />
+      <input
         type="number"
         placeholder="Ingrese el año de estreno de la pelicula..."
         value={newMovie.anio}
-        onChange={(e) =>
-          setNewMovie({ ...newMovie, anio: Number(e.target.value) })
-        }
+        onChange={(e) => {
+          const value = e.target.value;
+          if (value.length <= 4) {
+            setNewMovie({ ...newMovie, anio: value });
+          }
+        }}
+        onWheel={handleWheel}
         className="border p-2 rounded-lg"
+        maxLength={4}
       />
       <button
         onClick={handleSubmit}

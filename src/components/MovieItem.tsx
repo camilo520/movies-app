@@ -1,20 +1,41 @@
 import React from "react";
 import type { MovieItemProps } from "../types/MovieType";
+import Image from "next/image";
 
 //---Componente para mostrar una pelicula---
-const MovieItem: React.FC<MovieItemProps> = ({ movie, onDeleteMovie }) => {
+const MovieItem: React.FC<MovieItemProps> = ({
+  movie,
+  onDeleteMovie,
+  onEditMovie,
+}) => {
+  console.log(movie.id);
+
   return (
     <li className="p-2 ">
       <div className="shadow-[0px_0px_8px_0px_rgba(0,_0,_0,_0.2)] p-2 rounded mb-2 flex justify-between items-center">
         <div>
-          <p className="text-xl ">
-            <strong>{movie.titulo}</strong>
-          </p>
-          <img
+          <Image
             src={movie.poster}
             alt={`Poster de ${movie.titulo}`}
             className="w-24 h-auto rounded"
+            width={100}
+            height={100}
           />
+          <button
+            onClick={() => onEditMovie(movie)}
+            className="bg-blue-400 w-[40px] rounded cursor-pointer hover:bg-blue-500 mr-2"
+          >
+            ✏️
+          </button>
+          <p className="text-xl ">
+            <strong>{movie.titulo}</strong>
+          </p>
+          <p>
+            <strong>
+              Año:
+              {movie.anio}
+            </strong>
+          </p>
         </div>
         <button
           onClick={() => onDeleteMovie(movie.id)}
