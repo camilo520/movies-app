@@ -8,7 +8,6 @@ import Image from "next/image";
 export default function MovieApp() {
   //---Estado para manejar las peliculas---
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [movieToEdit, setMovieToEdit] = useState<Movie | null>(null);
 
   //---Estado para manejar el orden de las peliculas---
   const [sortBy, setSortBy] = useState<keyof Movie | "">("");
@@ -39,16 +38,6 @@ export default function MovieApp() {
     setMovies(updatedMovies);
   };
 
-  //---Función para editar una pelicula---
-  const handleUpdateMovie = (updatedMovie: Movie) => {
-    const updatedList = movies.map((m) =>
-      m.id === updatedMovie.id ? updatedMovie : m
-    );
-    setMovies(updatedList);
-    localStorage.setItem("movies", JSON.stringify(updatedList));
-    setMovieToEdit(null);
-  };
-
   //---Función para ordenar las peliculas---
   const sortedProducts = [...movies].sort((a, b) => {
     if (!sortBy) return 0;
@@ -73,11 +62,7 @@ export default function MovieApp() {
         <h1 className="text-4xl font-bold mb-5 flex justify-center text-center">
           Gestiona tus Peliculas
         </h1>
-        <MovieForm
-          movies={movies}
-          onAddMovie={addMovie}
-          movieToEdit={movieToEdit}
-        />
+        <MovieForm movies={movies} onAddMovie={addMovie} />
         <div className="flex flex-col justify-center p-8 gap-10">
           <p className="text-center font-bold text-2xl pl-30 pr-30">
             Administra tus peliculas de manera eficiente
@@ -96,7 +81,7 @@ export default function MovieApp() {
               className="border p-2  cursor-pointer text-sm bg-amber-50 rounded-lg"
             >
               <option value="">Seleccione...</option>
-              <option value="titulo">Titulo</option>
+              <option value="nombre">Titulo</option>
               <option value="anio">Año</option>
             </select>
           </div>

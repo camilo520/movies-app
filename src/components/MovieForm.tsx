@@ -3,12 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import type { MovieFormProps } from "../types/MovieType";
 
-const MovieForm: React.FC<MovieFormProps> = ({
-  onAddMovie,
-  movies,
-  onUpdateMovie,
-  movieToEdit,
-}) => {
+const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
   //---Estado para manejar las peliculas---
   const [newMovie, setNewMovie] = useState({
     titulo: "",
@@ -18,28 +13,24 @@ const MovieForm: React.FC<MovieFormProps> = ({
 
   //---Función para agregar una pelicula a la lista---
   const handleSubmit = () => {
-    // Validar si ya existe otra película con el mismo título
-    const titleExists = movies.some(
-      (movie) =>
-        movie.titulo.toLowerCase() === newMovie.titulo.toLowerCase() &&
-        movie.id !== movieToEdit?.id // excluir la que estamos editando
+    const exists = movies.some(
+      (movie) => movie.titulo.toLowerCase() === newMovie.titulo.toLowerCase()
     );
-
-    if (titleExists) {
-      toast.error("Ya existe una película con ese título.");
+    if (exists) {
+      toast.error("La pelicula ya está registrada.", {
+        position: "top-center",
+        autoClose: 3000,
+        isLoading: false,
+      });
       return;
     }
 
-    if (movieToEdit) {
-      // Modo edición
-      onUpdateMovie({ ...movieToEdit, ...newMovie });
-
-      toast.success("¡Película actualizada!");
-    } else {
-      // Modo creación
-      onAddMovie(newMovie);
-      toast.success("¡Película agregada!");
-    }
+    onAddMovie(newMovie);
+    toast.success("Pelicula agregada exitosamente!", {
+      position: "top-center",
+      autoClose: 1000,
+      isLoading: false,
+    });
 
     setNewMovie({ titulo: "", poster: "", anio: "" });
   };

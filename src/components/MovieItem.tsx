@@ -3,11 +3,7 @@ import type { MovieItemProps } from "../types/MovieType";
 import Image from "next/image";
 
 //---Componente para mostrar una pelicula---
-const MovieItem: React.FC<MovieItemProps> = ({
-  movie,
-  onDeleteMovie,
-  onEditMovie,
-}) => {
+const MovieItem: React.FC<MovieItemProps> = ({ movie, onDeleteMovie }) => {
   console.log(movie.id);
 
   return (
@@ -21,12 +17,7 @@ const MovieItem: React.FC<MovieItemProps> = ({
             width={100}
             height={100}
           />
-          <button
-            onClick={() => onEditMovie(movie)}
-            className="bg-blue-400 w-[40px] rounded cursor-pointer hover:bg-blue-500 mr-2"
-          >
-            ✏️
-          </button>
+
           <p className="text-xl ">
             <strong>{movie.titulo}</strong>
           </p>
