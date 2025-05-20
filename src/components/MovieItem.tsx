@@ -7,7 +7,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie, onDeleteMovie }) => {
   //---Estado para manejar la animación de eliminación---
   const [isRemoving, setIsRemoving] = useState(false);
 
-  //---Función para eliminar una pelicula de la lista---
+  //---Función para eliminar una pelicula de la lista con animación---
   const handleDelete = () => {
     setIsRemoving(true);
     setTimeout(() => {

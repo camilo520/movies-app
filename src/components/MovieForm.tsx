@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import type { MovieFormProps } from "../types/MovieType";
 import Image from "next/image";
 
+//---Componente para agregar una pelicula---
 const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
   //---Estado para manejar las peliculas---
   const [newMovie, setNewMovie] = useState({
@@ -29,9 +30,9 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
     }
 
     onAddMovie(newMovie);
-    toast.success("Pelicula agregada exitosamente!", {
+    toast.success("¡Pelicula agregada exitosamente!", {
       position: "top-center",
-      autoClose: 1000,
+      autoClose: 1500,
       isLoading: false,
     });
 

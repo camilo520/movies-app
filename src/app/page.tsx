@@ -13,7 +13,7 @@ export default function MovieApp() {
   //---Estado para manejar el orden de las peliculas---
   const [sortBy, setSortBy] = useState<keyof Movie | "">("");
 
-  //---Función para agregar una pelicula a la lista y que lo añada con un id---
+  //---Función para agregar una pelicula a la lista y que lo añada con un id predeterminado---
   const addMovie = (movie: Omit<Movie, "id">) => {
     const maxId = movies.length > 0 ? Math.max(...movies.map((m) => m.id)) : 0;
     const newMovie = { ...movie, id: maxId + 1 };
