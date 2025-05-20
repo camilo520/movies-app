@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import MovieForm from "../components/MovieForm";
 import MovieList from "../components/MovieList";
 import type { Movie } from "../types/MovieType";
-import Image from "next/image";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function MovieApp() {
@@ -51,7 +50,7 @@ export default function MovieApp() {
   });
 
   return (
-    <div className="p-4 flex flex-col justify-center  bg-slate-100 h-full ">
+    <div className="p-4 flex flex-col justify-center  h-full ">
       <div className="w-full flex justify-center flex-col items-center">
         <h1 className="text-4xl font-bold mb-5 flex justify-center text-center">
           Gestiona tus Peliculas

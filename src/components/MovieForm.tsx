@@ -46,6 +46,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
     fileInputRef.current?.click();
   };
 
+  //---Función para manejar el cambio de imagen---
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -70,34 +71,43 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
     <div className=" flex max-[700px]:flex-col justify-center items-center content-center max-[700px]:gap-1 gap-10 max-[700px]:pb-2">
       <div className="mb-4 flex flex-col gap-3">
         <ToastContainer />
-        <input
-          type="text"
-          placeholder="Ingrese el titulo de la pelicula..."
-          value={newMovie.titulo}
-          onChange={(e) => setNewMovie({ ...newMovie, titulo: e.target.value })}
-          className="border p-2 rounded-lg"
-        />
-
-        <input
-          type="number"
-          placeholder="Ingrese el año de estreno de la pelicula..."
-          value={newMovie.anio}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (value.length <= 4) {
-              setNewMovie({ ...newMovie, anio: value });
-            }
-          }}
-          onWheel={handleWheel}
-          className="border p-2 rounded-lg"
-          maxLength={4}
-        />
+        <div className="flex max-[700px]:flex-col flex-row gap-4 text-center">
+          <div>
+            <h2 className="font-bold">Titulo</h2>
+            <input
+              type="text"
+              placeholder="Ingrese el titulo de la pelicula..."
+              value={newMovie.titulo}
+              onChange={(e) =>
+                setNewMovie({ ...newMovie, titulo: e.target.value })
+              }
+              className="border p-2 rounded-lg w-[300px]"
+            />
+          </div>
+          <div>
+            <h2 className="font-bold">Año</h2>
+            <input
+              type="number"
+              placeholder="Ingrese el año de estreno..."
+              value={newMovie.anio}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value.length <= 4) {
+                  setNewMovie({ ...newMovie, anio: value });
+                }
+              }}
+              onWheel={handleWheel}
+              className="border p-2 rounded-lg w-[300px]"
+              maxLength={4}
+            />
+          </div>
+        </div>
         <button
           type="button"
           onClick={handleOpenFile}
-          className="bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-violet-700 cursor-pointer shadow-[0px_8px_17px_-2px_rgba(0,_0,_0,_0.2)]"
+          className="bg-violet-600 w-[220px] self-center text-white px-4 py-2 rounded-lg hover:bg-violet-700 cursor-pointer shadow-[0px_8px_17px_-2px_rgba(0,_0,_0,_0.2)]"
         >
-          Subir imagen
+          Subir Poster
         </button>
         <input
           type="file"

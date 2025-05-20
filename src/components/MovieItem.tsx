@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { MovieItemProps } from "../types/MovieType";
 import Image from "next/image";
 
@@ -6,12 +6,6 @@ import Image from "next/image";
 const MovieItem: React.FC<MovieItemProps> = ({ movie, onDeleteMovie }) => {
   //---Estado para manejar la animación de eliminación---
   const [isRemoving, setIsRemoving] = useState(false);
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   //---Función para eliminar una pelicula de la lista---
   const handleDelete = () => {
@@ -29,19 +23,19 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie, onDeleteMovie }) => {
     >
       <div className="shadow-[0_0_8px_0_rgba(0,0,0,0.2)] p-4 rounded-2xl mb-2 flex flex-col justify-between items-center bg-purple-200 h-[420px] ">
         <div className="w-[250px] h-[250px] max-[700px]:w-[220px] max-[700px]:h-full rounded-xl overflow-hidden relative">
-          {isClient && (
-            <Image
-              src={movie.poster}
-              alt={`Poster de ${movie.titulo}`}
-              fill
-              className="object-cover rounded-xl"
-            />
-          )}
+          <Image
+            src={movie.poster}
+            alt={`Poster de ${movie.titulo}`}
+            fill
+            className="object-cover rounded-xl"
+          />
         </div>
 
-        <div className="text-center mt-4">
-          <p className="text-xl font-bold">Título: {movie.titulo}</p>
-          <p className="text-md font-semibold">Año: {movie.anio}</p>
+        <div className="text-center mt-4 pb-2">
+          <p className="text-xl font-bold">Título </p>
+          <p>{movie.titulo}</p>
+          <p className="text-md font-semibold">Año de estreno: </p>
+          <p>{movie.anio}</p>
         </div>
         <button
           onClick={handleDelete}
