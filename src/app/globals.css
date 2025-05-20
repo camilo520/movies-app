@@ -10,6 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --breakpoint-xs: 30rem;
+  --breakpoint-2xl: 100rem;
+  --breakpoint-3xl: 120rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -79,4 +82,15 @@ body {
 
 .slide-out {
   animation: slideOut 0.4s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 100;
+    transform: translateX(50px);
+  }
+}
+
+.slide-in {
+  animation: slideIn 1s normal;
 }

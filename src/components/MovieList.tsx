@@ -5,7 +5,7 @@ import type { MovieListProps } from "../types/MovieType";
 //---Componente para mostrar la lista de peliculas---
 const MovieList: React.FC<MovieListProps> = ({ movies, onDeleteMovie }) => {
   return (
-    <div className="flex p-4 flex justify-center items-center flex-col">
+    <div className="flex p-4 justify-center items-center flex-col">
       {movies.length ? (
         <div className="flex flex-wrap gap-4 h-full">
           {movies.map((movie) => (
