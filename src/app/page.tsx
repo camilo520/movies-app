@@ -4,27 +4,15 @@ import MovieForm from "../components/MovieForm";
 import MovieList from "../components/MovieList";
 import type { Movie } from "../types/MovieType";
 import Image from "next/image";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export default function MovieApp() {
   //---Estado para manejar las peliculas---
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useLocalStorage<Movie[]>("movies", []);
   const [searchMovie, setSearchMovie] = useState("");
 
   //---Estado para manejar el orden de las peliculas---
   const [sortBy, setSortBy] = useState<keyof Movie | "">("");
-
-  // Cargar películas desde localStorage al iniciar
-  useEffect(() => {
-    const storedMovies = localStorage.getItem("movies");
-    if (storedMovies) {
-      setMovies(JSON.parse(storedMovies));
-    }
-  }, []);
-
-  // Guardar películas en localStorage cuando cambien
-  useEffect(() => {
-    localStorage.setItem("movies", JSON.stringify(movies));
-  }, [movies]);
 
   //---Función para agregar una pelicula a la lista y que lo añada con un id---
   const addMovie = (movie: Omit<Movie, "id">) => {
