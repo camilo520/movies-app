@@ -53,19 +53,19 @@ export default function MovieApp() {
     <div className="p-4 flex flex-col justify-center  h-full ">
       <div className="w-full flex justify-center flex-col items-center">
         <h1 className="text-4xl font-bold mb-5 flex justify-center text-center">
-          Gestiona tus Peliculas
+          Gestiona tus Películas
         </h1>
         <MovieForm movies={movies} onAddMovie={addMovie} />
       </div>
       <div className="pt-2 flex w-full justify-center ">
         <div className="flex w-full justify-start flex-col gap-5 p-10 max-[700px]:p-5 rounded-2xl shadow-[0px_8px_17px_-2px_rgba(0,_0,_0,_0.2)] bg-gradient-to-tl from-violet-300 to-indigo-200">
           <h2 className="text-2xl font-bold self-center text-center">
-            Tu lista de peliculas
+            Tu lista de películas
           </h2>
           <div className="flex flex-row max-[700px]:flex-col justify-center items-center gap-10">
             <div className=" flex flex-col max-w-[400px] justify-start w-full gap-3">
               <label className="font-bold text-xl">
-                Ordenar peliculas por:{" "}
+                Ordenar películas por:{" "}
               </label>
               <select
                 onChange={(e) => setSortBy(e.target.value as keyof Movie)}
@@ -77,7 +77,7 @@ export default function MovieApp() {
               </select>
             </div>
             <div className="flex flex-col  max-w-[400px] justify-start w-full gap-3">
-              <label className="font-bold text-xl">Busca tu pelicula</label>
+              <label className="font-bold text-xl">Busca tu película</label>
               <input
                 type="text"
                 placeholder="Escribe el titulo..."

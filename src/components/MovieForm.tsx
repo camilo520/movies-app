@@ -21,7 +21,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
       (movie) => movie.titulo.toLowerCase() === newMovie.titulo.toLowerCase()
     );
     if (exists) {
-      toast.error("La pelicula ya está registrada.", {
+      toast.error("La película ya está registrada.", {
         position: "top-center",
         autoClose: 3000,
         isLoading: false,
@@ -30,7 +30,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
     }
 
     onAddMovie(newMovie);
-    toast.success("¡Pelicula agregada exitosamente!", {
+    toast.success("¡Película agregada exitosamente!", {
       position: "top-center",
       autoClose: 1500,
       isLoading: false,
@@ -127,7 +127,7 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
               : "cursor-pointer bg-green-800 hover:bg-green-700"
           }`}
         >
-          Agregar Pelicula
+          Agregar Película
         </button>
       </div>
       {newMovie.poster && (
