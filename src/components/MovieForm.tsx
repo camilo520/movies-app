@@ -137,8 +137,8 @@ const MovieForm: React.FC<MovieFormProps> = ({ onAddMovie, movies }) => {
           className={`h-auto object-contain self-center rounded-md border  shadow-[0px_8px_17px_-2px_rgba(0,_0,_0,_0.2)] ${
             newMovie.poster ? "slide-in" : "slide-out"
           }`}
-          width={300}
-          height={300}
+          width={200}
+          height={200}
         />
       )}
     </div>
